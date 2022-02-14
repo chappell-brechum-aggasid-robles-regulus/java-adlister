@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
-    <form action="/ads/search" method="post">
+    <form action="/ads/search" method="get">
         <label for="query">Search: </label>
         <input type="text" name="query" id="query" placeholder="Search">
         <input type="submit" name="submit" value="Submit Search">

@@ -73,7 +73,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     public List<Ad> searchAdByTitle(String searchTerm) {
-        String query = "SELECT * FROM ads WHERE title = ?";
+        String query = "SELECT * FROM ads WHERE title LIKE ?";
         String searchTermWithWildCards = "%" + searchTerm + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);

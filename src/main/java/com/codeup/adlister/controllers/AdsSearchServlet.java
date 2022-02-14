@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/ads/search")
+@WebServlet(name="controllers.AdSearchServlet", urlPatterns = "/ads/search")
 public class AdsSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String param = req.getParameter("query");
-        List<Ad> results = new ArrayList<Ad>();
+        List<Ad> results = new ArrayList<>();
         if(param != null){
             results = DaoFactory.getAdsDao().searchAdByTitle(param);
         }
