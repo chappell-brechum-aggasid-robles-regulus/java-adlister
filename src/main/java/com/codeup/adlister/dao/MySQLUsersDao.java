@@ -47,7 +47,7 @@ public class MySQLUsersDao implements Users {
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
-            throw new RuntimeException("Error creating new user", e);
+            throw new RuntimeException("Username exists", e);
         }
     }
 
