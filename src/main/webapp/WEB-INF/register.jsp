@@ -50,7 +50,7 @@
                 <c:if test="${sessionScope.userNameExists}">
                     <div style="color: red">Username exists already</div>
                 </c:if>
-                <% session.removeAttribute("userNameExists"); %>
+                <% session.removeAttribute("userNameExists");%>
 
             </div>
             <div class="form-group">
