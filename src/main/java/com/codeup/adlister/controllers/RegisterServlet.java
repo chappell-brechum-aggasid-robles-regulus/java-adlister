@@ -13,6 +13,12 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Creating user variable
+        User user = (User) request.getSession().getAttribute("user");
+        if(user != null) {
+            response.sendRedirect("/profile");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
