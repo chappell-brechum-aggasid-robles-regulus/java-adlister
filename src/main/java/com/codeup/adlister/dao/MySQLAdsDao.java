@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,22 +76,19 @@ public class MySQLAdsDao implements Ads {
     public Ad getAdById(Long adId ) {
         Ad ad = null;
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
-            try {
+        try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setLong(1, Long.parseLong("adId"));
+            stmt.setString(1,String.valueOf(adId));
+            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                ad = new Ad(
-                        rs.getLong("id"),
-                        rs.getLong("user_id"),
-                        rs.getString("title "),
-                        rs.getString("description")
-                );
+            if (rs.next()) {
+                ad = extractAd(rs);
             }
             return ad;
-    } catch (SQLException e) {
-                throw new RuntimeException("error finding the ad by the id", e);
-            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding the Ad by the ID.", e);
+        }
+    }
 
     public List<Ad> searchAdByTitle(String searchTerm) {
         String query = "SELECT * FROM ads WHERE title LIKE ?";
@@ -135,6 +129,20 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error finding the Ad!");
+        }
+    }
+
+    public boolean editAdById(Ad ad) {
+        String query = "UPDATE ads SET title = ?, description = ?";
+        query += "WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1,ad.getTitle());
+            stmt.setString(2,ad.getDescription());
+            stmt.setLong(3,ad.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("error finding the ad by the id", e);
         }
     }
 }
