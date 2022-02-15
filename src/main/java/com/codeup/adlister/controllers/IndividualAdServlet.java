@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //<% when the user goes to the ad page, it redirects them to show the individual ads that were created %>
-@WebServlet(name = "IndividualAdServlet", urlPatterns = "/showAd")
+@WebServlet(name = "IndividualAdServlet", urlPatterns = "/showAds")
 public class IndividualAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //
