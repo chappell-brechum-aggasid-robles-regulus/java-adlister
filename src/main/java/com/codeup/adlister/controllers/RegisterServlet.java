@@ -13,6 +13,12 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Creating user variable
+        User user = (User) request.getSession().getAttribute("user");
+        if(user != null) {
+            response.sendRedirect("/profile");
+            return;
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -28,7 +34,14 @@ public class RegisterServlet extends HttpServlet {
             || password.isEmpty()
             || (! password.equals(passwordConfirmation));
 
+        //
+        User userExists = DaoFactory.getUsersDao().findByUsername(username);
+//        User emailExists = DaoFactory.getEmailDao().findByEmail(email);
         if (inputHasErrors) {
+            response.sendRedirect("/register");
+            return;
+        } else if (userExists != null) {
+            request.getSession().setAttribute("userNameExists", true);
             response.sendRedirect("/register");
             return;
         }
