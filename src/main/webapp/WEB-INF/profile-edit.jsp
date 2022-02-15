@@ -18,7 +18,12 @@
         <button>Apply</button>
     </div>
     <div>
-        <button >Delete My Account</button>
+        <h4>Registered Email: <c:out value="${email}"/></h4>
+        <button>Edit Email</button>
+        <button>Apply</button>
+    </div>
+    <div>
+        <button>Delete My Account</button>
     </div>
 </div>
 

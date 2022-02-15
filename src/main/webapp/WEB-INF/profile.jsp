@@ -11,14 +11,9 @@
 
     <div class="container">
         <h1>Welcome, <c:out value="${username}"/>!</h1>
-        <div>
-            <h4>Registered Email: <c:out value="${email}"/></h4>
-            <button>Edit Email</button>
-            <button>Apply</button>
-        </div>
-        <div>
-            <button >Delete My Account</button>
-        </div>
+        <h4>Email: <c:out value="${email}"/></h4>
+        <button type="submit" formaction="/profile-edit">Edit Profile</button>
+        <button type="submit" formaction="/reset">Edit Profile</button>
     </div>
     <div class="container">
         <h2>Your Ads</h2>
