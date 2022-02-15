@@ -48,7 +48,7 @@
                 <input id="username" name="username" class="form-control" type="text">
 
                 <c:if test="${sessionScope.userNameExists}">
-                    <div style="color: red">Username exists already.</div>
+                    <div style="color: red">Username exists already</div>
                 </c:if>
                 <% session.removeAttribute("userNameExists"); %>
 
@@ -65,7 +65,7 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input id="confirm_password" name="confirm_password" class="form-control" type="password" placeholder="Password must be at least 6 characters long">
             </div>
-            <input type="submit" class="btn btn-primary btn-block">
+            <input type="submit" class="btn btn-primary btn-block" on>
         </form>
 
     </div>
