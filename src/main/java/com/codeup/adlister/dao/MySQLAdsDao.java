@@ -17,9 +17,11 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
+              
                     config.getUrl(),
-                    config.getUser(),
+                    config.getUsername(),
                     config.getPassword()
+
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -73,7 +75,7 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
+  
     public Ad getAdById(Long adId ) {
         Ad ad = null;
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
@@ -94,5 +96,46 @@ public class MySQLAdsDao implements Ads {
                 throw new RuntimeException("error finding the ad by the id", e);
             }
 
+    public List<Ad> searchAdByTitle(String searchTerm) {
+        String query = "SELECT * FROM ads WHERE title LIKE ?";
+        String searchTermWithWildCards = "%" + searchTerm + "%";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, searchTermWithWildCards);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public List<Ad> searchAdByUser(long user_id) {
+        String sql = "SELECT * FROM ads WHERE user_id = ?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, user_id);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+
+    public void deleteAdById(long ad_id) {
+        String sql = "DELETE FROM ads WHERE id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, String.valueOf(ad_id));
+            System.out.println(stmt);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding the Ad!");
+        }
     }
 }
+
