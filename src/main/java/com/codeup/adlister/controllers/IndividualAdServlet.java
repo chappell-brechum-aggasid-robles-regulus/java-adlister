@@ -1,6 +1,8 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +15,12 @@ import java.io.IOException;
 @WebServlet(name = "IndividualAdServlet", urlPatterns = "/showAds")
 public class IndividualAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//        String pathInfo = request.getPathInfo();
-//        int adId = Integer.parseInt(pathInfo.substring(1));
-        Long adId = Long.parseLong(request.getParameter("adId"));
-        request.setAttribute("ad", DaoFactory.getAdsDao().getAdById(adId));
+        String adId = request.getParameter("adId");
+        Ad adResult = DaoFactory.getAdsDao().getAdById(Long.valueOf(adId));
+        request.setAttribute("ad", adResult);
+//        Long adUserId = adResult.getUserId();
+//        User userResult = DaoFactory.getUsersDao().getUserById(adUserId);
+//        req.setAttribute("user", userResult);
         request.getRequestDispatcher("/WEB-INF/ads/showAds.jsp").forward(request, response);
     }
 }
