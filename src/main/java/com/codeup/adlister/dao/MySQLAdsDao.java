@@ -79,11 +79,11 @@ public class MySQLAdsDao implements Ads {
     public Ad getAdById(Long adId ) {
         Ad ad = null;
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
-            try {
+        try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, Long.parseLong("adId"));
             ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 ad = new Ad(
                         rs.getLong("id"),
                         rs.getLong("user_id"),
@@ -92,10 +92,10 @@ public class MySQLAdsDao implements Ads {
                 );
             }
             return ad;
-    } catch (SQLException e) {
-                throw new RuntimeException("error finding the ad by the id", e);
-            }
-
+        } catch (SQLException e) {
+            throw new RuntimeException("error finding the ad by the id", e);
+        }
+    }
     public List<Ad> searchAdByTitle(String searchTerm) {
         String query = "SELECT * FROM ads WHERE title LIKE ?";
         String searchTermWithWildCards = "%" + searchTerm + "%";

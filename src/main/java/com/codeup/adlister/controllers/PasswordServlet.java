@@ -1,5 +1,6 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
 import com.codeup.adlister.util.Password;
 
@@ -31,18 +32,20 @@ public class PasswordServlet extends HttpServlet {
         String newpassword = request.getParameter("newpassword");
         String passwordConfirmation = request.getParameter("confirm_password");
         boolean incorrectPass = Password.check(oldpassword, currentUser.getPassword());
-        boolean inputHasErrors = oldpassword.isEmpty()
-                || newpassword.isEmpty()
-                || (! newpassword.equals(passwordConfirmation));
+        boolean newPassMismatch = (! newpassword.equals(passwordConfirmation));
         if(incorrectPass){
             // Add Error Message, Password Incorrect
+            request.getSession().setAttribute("passwordFail", true);
             response.sendRedirect("/reset");
-        } else if (inputHasErrors){
+        } else if (newPassMismatch){
             // Add Error Message, New Password and Confirmation do not match
+            request.getSession().setAttribute("newPasswordFail", true);
             response.sendRedirect("/reset");
         } else {
             // Add usersDAO function to change password
+         //   DaoFactory.getUsersDao().updatePass(currentUser.getUsername());
             // Add Success Message
+            request.getSession().setAttribute("passChanged", true);
             response.sendRedirect("/reset");
         }
 
