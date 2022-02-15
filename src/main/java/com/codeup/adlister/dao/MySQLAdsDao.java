@@ -18,9 +18,9 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
 
-                config.getUrl(),
-                config.getUsername(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUsername(),
+                    config.getPassword()
 
             );
         } catch (SQLException e) {
@@ -93,13 +93,27 @@ public class MySQLAdsDao implements Ads {
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, String.valueOf(user_id));
+            stmt.setLong(1, user_id);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+
+    public void deleteAdById(long ad_id) {
+        String sql = "DELETE FROM ads WHERE id = ?";
+        PreparedStatement stmt;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, String.valueOf(ad_id));
+            System.out.println(stmt);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding the Ad!");
+        }
     }
 }
 
