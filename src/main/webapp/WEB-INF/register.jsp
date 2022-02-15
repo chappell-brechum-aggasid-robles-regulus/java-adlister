@@ -5,6 +5,8 @@
     <jsp:include page="partials/head.jsp">
         <jsp:param name="title" value="Register For Our Site!" />
     </jsp:include>
+
+<%--  JS script below //https://krazytech.com/programs/java-registration-page-using-servlet-mysql-mvc--%>
     <script>
 	    function validate()
 	    {
@@ -23,7 +25,7 @@
 			    alert("Email can't be blank");
 			    return false;
 		    }
-		    else if(password.length<6)
+		    else if(password.length<1)
 		    {
 			    alert("Password must be at least 6 characters long.");
 			    return false;
@@ -40,10 +42,16 @@
     <jsp:include page="partials/navbar.jsp" />
     <div class="container">
         <h1>Please fill in your information.</h1>
-        <form name="form" action="/register" method="post" onsubmit="validate()">
+        <form name="form" action="/register" method="post" onsubmit="return validate()">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text">
+
+                <c:if test="${sessionScope.userNameExists}">
+                    <div style="color: red">Username exists already.</div>
+                </c:if>
+                <% session.removeAttribute("userNameExists"); %>
+
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -59,9 +67,7 @@
             </div>
             <input type="submit" class="btn btn-primary btn-block">
         </form>
-        <c:if test="${sessionScope.userNameExists}">
-            <div>Username exists already.</div>
-        </c:if>
+
     </div>
 </body>
 </html>
