@@ -11,6 +11,12 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
 
+
+    
+
+    // Ad getAdById (int adId);
+    Ad getAdById(Long adId);
+  
     // Search for a List of Ads by Title
     List<Ad> searchAdByTitle(String param);
 
@@ -19,4 +25,5 @@ public interface Ads {
 
     // Delete ad by Id
     void deleteAdById(long param);
+
 }

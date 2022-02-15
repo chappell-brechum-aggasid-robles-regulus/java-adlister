@@ -28,6 +28,10 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
+    public Ad getAdById(Long adId) {
+        return null;
+    }
+
     public List<Ad> searchAdByTitle(String param) {
         return null;
     }
