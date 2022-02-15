@@ -23,14 +23,10 @@
     <div class="container">
         <h2>Your Ads</h2>
         <c:forEach var="ad" items="${ads}">
-            <c:choose>
-                <c:when test="${ad.userId.equals(id)}">
-                    <div class="col-md-6">
-                        <h2><c:out value="${ad.title}"/></h2>
-                        <p><c:out value="${ad.description}"/></p>
-                    </div>
-                </c:when>
-            </c:choose>
+            <div class="col-md-6">
+                <h2><c:out value="${ad.title}"/></h2>
+                <p><c:out value="${ad.description}"/></p>
+            </div>
         </c:forEach>
     </div>
 
