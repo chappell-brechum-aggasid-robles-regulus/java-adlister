@@ -34,7 +34,14 @@ public class RegisterServlet extends HttpServlet {
             || password.isEmpty()
             || (! password.equals(passwordConfirmation));
 
+        //
+        User userExists = DaoFactory.getUsersDao().findByUsername(username);
+//        User emailExists = DaoFactory.getEmailDao().findByEmail(email);
         if (inputHasErrors) {
+            response.sendRedirect("/register");
+            return;
+        } else if (userExists != null) {
+            request.getSession().setAttribute("userNameExists", true);
             response.sendRedirect("/register");
             return;
         }
