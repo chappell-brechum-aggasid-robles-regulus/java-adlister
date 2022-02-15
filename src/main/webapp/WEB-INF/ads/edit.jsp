@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: jonrob287
-  Date: 2/15/22
-  Time: 2:36 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,7 +9,7 @@
 <body>
 <div class="container">
     <h1>Create a new Ad</h1>
-    <form action="/ads/edit" method="post">
+    <form action="/ads/editAd" method="post">
         <div class="form-group">
             <input type="hidden" name="id" value="<c:out value='${ad.id}' />" />
             <label> Title:
