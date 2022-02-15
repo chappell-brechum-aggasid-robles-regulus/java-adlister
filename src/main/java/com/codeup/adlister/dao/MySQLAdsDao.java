@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,5 +135,18 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error finding the Ad!");
         }
     }
-}
+
+    public boolean editAdById(Ad ad) {
+        String query = "UPDATE ads SET title = ?, description = ?";
+        query += "WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1,ad.getTitle());
+            stmt.setString(2,ad.getDescription());
+            stmt.setLong(3,ad.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("error finding the ad by the id", e);
+        }
+    }}
 
