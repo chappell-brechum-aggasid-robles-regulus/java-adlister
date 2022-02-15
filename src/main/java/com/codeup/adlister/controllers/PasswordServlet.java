@@ -43,7 +43,7 @@ public class PasswordServlet extends HttpServlet {
             response.sendRedirect("/reset");
         } else {
             // Add usersDAO function to change password
-         //   DaoFactory.getUsersDao().updatePass(currentUser.getUsername());
+            DaoFactory.getUsersDao().updatePassword(currentUser.getUsername(), newpassword);
             // Add Success Message
             request.getSession().setAttribute("passChanged", true);
             response.sendRedirect("/reset");
