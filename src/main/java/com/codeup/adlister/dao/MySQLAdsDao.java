@@ -88,7 +88,7 @@ public class MySQLAdsDao implements Ads {
         return new ArrayList<>();
     }
 
-    public List<Ad> searchAdByUser(Long user_id) {
+    public List<Ad> searchAdByUser(long user_id) {
         String sql = "SELECT * FROM ads WHERE user_id = ?";
         PreparedStatement stmt = null;
         try {

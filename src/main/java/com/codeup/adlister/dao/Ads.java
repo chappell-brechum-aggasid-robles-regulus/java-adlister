@@ -11,4 +11,6 @@ public interface Ads {
     Long insert(Ad ad);
     // Search for a List of Ads by Title
     List<Ad> searchAdByTitle(String param);
+    // Search for a List of Ads by User ID
+    List<Ad> searchAdByUser(long param);
 }
