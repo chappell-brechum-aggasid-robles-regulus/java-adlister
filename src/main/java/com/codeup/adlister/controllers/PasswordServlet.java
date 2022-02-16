@@ -32,9 +32,6 @@ public class PasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newpassword");
         String passwordConfirmation = request.getParameter("confirm_password");
         boolean incorrectPass = !Password.check(currentPassword, currentUser.getPassword());
-        System.out.println("input pass: " + currentPassword);
-        System.out.println("current users pass" + currentUser.getPassword());
-        System.out.println(incorrectPass);
         boolean newPassMismatch = (! newPassword.equals(passwordConfirmation));
         if(incorrectPass){
             // Add Error Message, Password Incorrect

@@ -15,14 +15,16 @@
     <div>
         <h4>Registered Email: <c:out value="${email}"/></h4>
         <form>
-            <button>Edit Email</button>
-            <button class="hidden" formaction="/profile-edit" formmethod="post">Apply</button>
+            <button formaction="/profile-edit" formmethod="post" class="btn btn-secondary btn-lg">Apply</button>
         </form>
     </div>
+    <hr>
     <div>
         <form>
-            <button type="submit" formaction="/resetpass">Reset My Password</button>
-            <button type="submit" formaction="/deactivate">Delete My Account</button>
+            <button type="submit" formaction="/resetpass" class="btn btn-secondary btn-lg">Reset My Password</button>
+        </form>
+        <form>
+            <button type="submit" formaction="/deactivate" class="btn btn-danger btn-lg">Delete My Account</button>
         </form>
     </div>
 </div>
