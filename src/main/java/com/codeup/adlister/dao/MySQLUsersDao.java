@@ -76,6 +76,19 @@ public class MySQLUsersDao implements Users {
             throw new RuntimeException("Password Update Failure", e);
         }
     }
+    public void updateEmail(long userId, String email){
+        String updateQuery = "UPDATE users SET email = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(updateQuery);
+            stmt.setString(1, email);
+            stmt.setLong(2, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Email Update Failure", e);
+        }
+    }
+
     public User getUserById(long userId){
         String sql = "SELECT * FROM users WHERE id = ?";
         try {
