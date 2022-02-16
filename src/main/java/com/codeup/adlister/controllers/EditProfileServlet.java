@@ -1,6 +1,9 @@
 package com.codeup.adlister.controllers;
 
+import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +28,21 @@ public class EditProfileServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/WEB-INF/profile-edit.jsp").forward(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User currentUser = (User) request.getSession().getAttribute("user");
+        String newEmail = request.getParameter("newemail");
+        // Can add in already registered Validation to boolean below Later
+        boolean badEmail = newEmail.isEmpty();
+        if(badEmail){
+            // Add Error Message, Address Cannot be Empty
+            request.getSession().setAttribute("emailFail", true);
+            response.sendRedirect("/profile-edit");
+        } else {
+            // Call usersDAO function to change Email
+            DaoFactory.getUsersDao().updateEmail(currentUser.getId(), newEmail);
+            // Add Success Message
+            request.getSession().setAttribute("emailChanged", true);
+            response.sendRedirect("/profile-edit");
+        }
     }
 }
