@@ -132,7 +132,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    public boolean editAdById(Ad ad) {
+    public void editAdById(Ad ad) {
         String query = "UPDATE ads SET title = ?, description = ?";
         query += "WHERE id = ?";
         try {
@@ -140,10 +140,9 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(1,ad.getTitle());
             stmt.setString(2,ad.getDescription());
             stmt.setLong(3,ad.getId());
-            return stmt.executeUpdate() > 0;
+            stmt.executeUpdate(query);
         } catch (SQLException e) {
             throw new RuntimeException("error finding the ad by the id", e);
         }
     }
 }
-

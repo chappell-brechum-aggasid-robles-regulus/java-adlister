@@ -26,6 +26,6 @@ public interface Ads {
     // Delete ad by Id
     void deleteAdById(long param);
 
-    // Edit ad by Id
-    boolean editAdById(Ad ad);
+    // Update Edit ad by Id
+    void editAdById(Ad ad);
 }
