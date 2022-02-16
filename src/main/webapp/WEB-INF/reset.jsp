@@ -42,7 +42,7 @@
     <c:if test="${sessionScope.passChanged}">
       <div style="color: green">Your Password has been Successfully Changed</div>
     </c:if>
-    <% session.removeAttribute("newPasswordFail");%>
+    <% session.removeAttribute("passChanged");%>
   </form>
 </div>
 

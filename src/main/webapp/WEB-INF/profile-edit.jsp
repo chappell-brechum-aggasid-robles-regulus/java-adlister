@@ -17,7 +17,15 @@
         <form>
             <label for="newemail">Enter New Email</label>
             <input id="newemail" name="newemail" type="text">
+            <c:if test="${sessionScope.emailFail}">
+                <div style="color: red">Email cannot be empty</div>
+            </c:if>
+            <% session.removeAttribute("passwordFail");%>
             <button formaction="/profile-edit" formmethod="post" class="btn btn-secondary mt-1">Apply</button>
+            <c:if test="${sessionScope.emailChanged}">
+                <div style="color: green">Email Has Been Updated</div>
+            </c:if>
+            <% session.removeAttribute("emailChanged");%>
         </form>
     </div>
     <hr>
