@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Create a new Ad</h1>
+    <h1>Edit Ad</h1>
     <form action="/ads/editAd" method="post">
         <div class="form-group">
             <input type="hidden" name="id" value="<c:out value='${ad.id}' />"/>
@@ -27,9 +27,6 @@
             <button formaction="/ads/updateAd?adId=<c:out value="${ad.id}"/>" formmethod="post" class="btn btn-primary btn=block">Save</button>
         </div>
     </form>
-<%--    <form action="/ads/updateAd?adId=<c:out value="${ad.id}"/>" method="post">--%>
-<%--        <input type="submit" class="btn btn-primary btn-block" name="id" value="Save">--%>
-<%--    </form>--%>
 </div>
 </body>
 </html>
