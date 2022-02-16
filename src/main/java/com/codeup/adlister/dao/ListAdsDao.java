@@ -46,8 +46,7 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
-    public boolean editAdById(Ad ad) {
-        return false;
+    public void editAdById(Ad ad) {
     }
 
     private List<Ad> generateAds() {

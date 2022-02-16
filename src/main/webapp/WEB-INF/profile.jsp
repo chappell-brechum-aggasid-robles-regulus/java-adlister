@@ -20,7 +20,6 @@
             <form action="/ads/editAd?id=<c:out value="${ad.id}"/>" method="post">
                 <input type="submit" class="btn btn-primary btn-block" name="id" value="Edit">
             </form>
-            <input type="button" class="btn btn-primary btn-block" id="update" value="Update">
             <form action="/ads/delete?id=<c:out value = "${ad.id}"/>" method="post">
                 <input type="submit" class="btn btn-danger btn-block" name="id" value="Delete">
             </form>
