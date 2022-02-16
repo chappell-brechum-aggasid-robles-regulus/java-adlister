@@ -14,16 +14,16 @@
     <h2>Edit Your Profile</h2>
     <div>
         <h4>Registered Email: <c:out value="${email}"/></h4>
-        <button>Edit Email</button>
-        <button>Apply</button>
+        <form>
+            <button>Edit Email</button>
+            <button class="hidden" formaction="/profile-edit" formmethod="post">Apply</button>
+        </form>
     </div>
     <div>
-        <h4>Registered Email: <c:out value="${email}"/></h4>
-        <button>Edit Email</button>
-        <button>Apply</button>
-    </div>
-    <div>
-        <button>Delete My Account</button>
+        <form>
+            <button type="submit" formaction="/resetpass">Reset My Password</button>
+            <button type="submit" formaction="/deactivate">Delete My Account</button>
+        </form>
     </div>
 </div>
 

@@ -13,9 +13,9 @@
     <div class="container">
         <h1>Welcome, <c:out value="${username}"/>!</h1>
         <h4>Email: <c:out value="${email}"/></h4>
-        <button type="submit" formaction="/profile-edit">Edit Profile</button>
-        <button type="submit" formaction="/reset">Edit Profile</button>
-
+        <form>
+            <button type="submit" formaction="/profile-edit">Edit Profile</button>
+        </form>
     </div>
     <div>
         <button>Delete My Account</button>

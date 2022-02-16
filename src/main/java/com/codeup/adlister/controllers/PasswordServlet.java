@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/reset")
+@WebServlet("/resetpass")
 public class PasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
@@ -28,25 +28,28 @@ public class PasswordServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
-        String oldpassword = request.getParameter("oldpassword");
-        String newpassword = request.getParameter("newpassword");
+        String currentPassword = request.getParameter("currentpassword");
+        String newPassword = request.getParameter("newpassword");
         String passwordConfirmation = request.getParameter("confirm_password");
-        boolean incorrectPass = Password.check(oldpassword, currentUser.getPassword());
-        boolean newPassMismatch = (! newpassword.equals(passwordConfirmation));
+        boolean incorrectPass = !Password.check(currentPassword, currentUser.getPassword());
+        System.out.println("input pass: " + currentPassword);
+        System.out.println("current users pass" + currentUser.getPassword());
+        System.out.println(incorrectPass);
+        boolean newPassMismatch = (! newPassword.equals(passwordConfirmation));
         if(incorrectPass){
             // Add Error Message, Password Incorrect
             request.getSession().setAttribute("passwordFail", true);
-            response.sendRedirect("/reset");
+            response.sendRedirect("/resetpass");
         } else if (newPassMismatch){
             // Add Error Message, New Password and Confirmation do not match
             request.getSession().setAttribute("newPasswordFail", true);
-            response.sendRedirect("/reset");
+            response.sendRedirect("/resetpass");
         } else {
             // Add usersDAO function to change password
-            DaoFactory.getUsersDao().updatePassword(currentUser.getUsername(), newpassword);
+            DaoFactory.getUsersDao().updatePassword(currentUser.getUsername(), newPassword);
             // Add Success Message
             request.getSession().setAttribute("passChanged", true);
-            response.sendRedirect("/reset");
+            response.sendRedirect("/resetpass");
         }
 
     }
