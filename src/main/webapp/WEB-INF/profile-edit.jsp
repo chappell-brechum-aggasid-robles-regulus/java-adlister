@@ -15,7 +15,9 @@
     <div>
         <h4>Registered Email: <c:out value="${email}"/></h4>
         <form>
-            <button formaction="/profile-edit" formmethod="post" class="btn btn-secondary btn-lg">Apply</button>
+            <label for="newemail">Enter New Email</label>
+            <input id="newemail" name="newemail" type="text">
+            <button formaction="/profile-edit" formmethod="post" class="btn btn-secondary mt-1">Apply</button>
         </form>
     </div>
     <hr>
