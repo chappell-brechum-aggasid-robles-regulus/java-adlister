@@ -5,6 +5,7 @@ import com.codeup.adlister.util.Password;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MySQLUsersDao implements Users {
     private Connection connection = null;
@@ -74,6 +75,18 @@ public class MySQLUsersDao implements Users {
             e.printStackTrace();
             throw new RuntimeException("Password Update Failure", e);
         }
+    }
+    public User getUserById(long userId){
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            return extractUser(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new User();
     }
 
     private User extractUser(ResultSet rs) throws SQLException {
