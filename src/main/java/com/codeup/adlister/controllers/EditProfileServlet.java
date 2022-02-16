@@ -42,6 +42,10 @@ public class EditProfileServlet extends HttpServlet {
             DaoFactory.getUsersDao().updateEmail(currentUser.getId(), newEmail);
             // Add Success Message
             request.getSession().setAttribute("emailChanged", true);
+            // Reset the User in the Current Session to allow new Profile Changes to display
+            User userReset = DaoFactory.getUsersDao().findByUsername(currentUser.getUsername());
+            request.getSession().setAttribute("user", userReset);
+
             response.sendRedirect("/profile-edit");
         }
     }
