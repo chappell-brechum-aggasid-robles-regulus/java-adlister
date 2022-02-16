@@ -18,16 +18,10 @@ public class PostEditAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User) req.getSession().getAttribute("user");
         long userId = currentUser.getId();
-        System.out.println("User Id:" + userId);
-        String adId = req.getParameter("adId");
-        System.out.println("Ad Id thru url: "+ adId);
-        String id = req.getParameter("id");
-        System.out.println("Ad Id thru jsp: " + id);
+        long id = Long.parseLong(req.getParameter("id"));
         String title = req.getParameter("title");
-        System.out.println("Title: " + title);
         String description = req.getParameter("description");
-        System.out.println("Description: " + description);
-        Ad ad = new Ad(Long.parseLong(id), userId, title, description);
+        Ad ad = new Ad(id, userId, title, description);
         DaoFactory.getAdsDao().editAdById(ad);
         resp.sendRedirect("/profile");
     }

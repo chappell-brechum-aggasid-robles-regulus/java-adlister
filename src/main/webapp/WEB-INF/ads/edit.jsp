@@ -23,8 +23,8 @@
             <textarea id="description" name="description" class="form-control"><c:out
                     value='${ad.description}'/></textarea>
         </div>
-        <div>
-            <a href="/ads/updateAd?adId=<c:out value="${ad.id}"/>">Save</a>
+        <div class="form-group">
+            <button formaction="/ads/updateAd?adId=<c:out value="${ad.id}"/>" formmethod="post" class="btn btn-primary btn=block">Save</button>
         </div>
     </form>
 <%--    <form action="/ads/updateAd?adId=<c:out value="${ad.id}"/>" method="post">--%>

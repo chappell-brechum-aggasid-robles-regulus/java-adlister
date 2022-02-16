@@ -125,7 +125,6 @@ public class MySQLAdsDao implements Ads {
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, String.valueOf(ad_id));
-            System.out.println(stmt);
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error finding the Ad!");
@@ -140,7 +139,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(1,ad.getTitle());
             stmt.setString(2,ad.getDescription());
             stmt.setLong(3,ad.getId());
-            stmt.executeUpdate(query);
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("error finding the ad by the id", e);
         }
