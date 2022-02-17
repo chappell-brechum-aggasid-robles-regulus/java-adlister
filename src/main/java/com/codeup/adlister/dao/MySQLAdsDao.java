@@ -87,6 +87,7 @@ public class MySQLAdsDao implements Ads {
             return ad;
         } catch (SQLException e) {
             throw new RuntimeException("Error finding the Ad by the ID.", e);
+
         }
     }
 
