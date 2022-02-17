@@ -16,10 +16,15 @@ import java.util.List;
 public class AdsSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String category = req.getParameter("category");
         String param = req.getParameter("query");
         List<Ad> results = new ArrayList<>();
         if(param != null){
-            results = DaoFactory.getAdsDao().searchAdByTitle(param);
+            if(category.contains("0")) {
+                results = DaoFactory.getAdsDao().searchAdByTitle(param);
+            }else{
+                results = DaoFactory.getAdsDao().searchAdByCategory(Long.parseLong(category), param);
+            }
         }
         req.setAttribute("ads", results);
         req.setAttribute("query", param);
