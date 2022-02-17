@@ -49,6 +49,11 @@ public class ListAdsDao implements Ads {
     public void editAdById(Ad ad) {
     }
 
+    @Override
+    public List<Ad> searchAdByCategory(long category, String param) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(

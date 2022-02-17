@@ -28,4 +28,7 @@ public interface Ads {
 
     // Update Edit ad by Id
     void editAdById(Ad ad);
+
+    // Search Ad by Category and Title
+    List<Ad> searchAdByCategory(long category, String param);
 }
