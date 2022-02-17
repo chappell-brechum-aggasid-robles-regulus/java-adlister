@@ -14,7 +14,7 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-              
+
                     config.getUrl(),
                     config.getUsername(),
                     config.getPassword()
@@ -55,7 +55,6 @@ public class MySQLAdsDao implements Ads {
     }
 
 
-
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getLong("id"),
@@ -72,13 +71,13 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-  
-    public Ad getAdById(Long adId ) {
+
+    public Ad getAdById(Long adId) {
         Ad ad = null;
         String query = "SELECT * FROM ads WHERE id = ? LIMIT 1";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setString(1,String.valueOf(adId));
+            stmt.setString(1, String.valueOf(adId));
             System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -118,6 +117,21 @@ public class MySQLAdsDao implements Ads {
         return new ArrayList<>();
     }
 
+    public List<Ad> searchAdByCategory(long cat_id, String searchTerm) {
+        String sql = "SELECT * FROM ads inner join ad_category on ad_category.ad_id = ads.id WHERE ad_category.cat_id = ? AND ads.title LIKE ?";
+        String searchTermWithWildCards = "%" + searchTerm + "%";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, cat_id);
+            stmt.setString(2, searchTermWithWildCards);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
 
     public void deleteAdById(long ad_id) {
         String sql = "DELETE FROM ads WHERE id = ?";
@@ -136,9 +150,9 @@ public class MySQLAdsDao implements Ads {
         query += "WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setString(1,ad.getTitle());
-            stmt.setString(2,ad.getDescription());
-            stmt.setLong(3,ad.getId());
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("error finding the ad by the id", e);
