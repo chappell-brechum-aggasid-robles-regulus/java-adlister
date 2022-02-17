@@ -32,16 +32,20 @@ public class PasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newpassword");
         String passwordConfirmation = request.getParameter("confirm_password");
         boolean incorrectPass = !Password.check(currentPassword, currentUser.getPassword());
-        boolean newPassMismatch = (! newPassword.equals(passwordConfirmation));
-        if(incorrectPass){
+        boolean newPassMismatch = (!newPassword.equals(passwordConfirmation));
+        boolean emptyPass = newPassword.isEmpty();
+        if (incorrectPass) {
             // Add Error Message, Password Incorrect
             request.getSession().setAttribute("passwordFail", true);
             response.sendRedirect("/resetpass");
-        } else if (newPassMismatch){
+        } else if (newPassMismatch) {
             // Add Error Message, New Password and Confirmation do not match
             request.getSession().setAttribute("newPasswordFail", true);
             response.sendRedirect("/resetpass");
-        } else {
+        } else if (emptyPass){
+            request.getSession().setAttribute("newPasswordEmpty", true);
+            response.sendRedirect("/resetpass");
+        }else {
             // Add usersDAO function to change password
             DaoFactory.getUsersDao().updatePassword(currentUser.getUsername(), newPassword);
             // Add Success Message
