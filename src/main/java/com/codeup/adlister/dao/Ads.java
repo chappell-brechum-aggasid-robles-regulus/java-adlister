@@ -31,4 +31,7 @@ public interface Ads {
 
     // Search Ad by Category and Title
     List<Ad> searchAdByCategory(long category, String param);
+
+    // Insert Ad and Category
+    void insertAdAndCategory(Ad ad, String[] categories);
 }
