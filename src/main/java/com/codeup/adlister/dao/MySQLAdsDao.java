@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
@@ -51,6 +52,32 @@ public class MySQLAdsDao implements Ads {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
+        }
+    }
+
+    public void insertAdAndCategory(Ad ad, String[] categories) {
+        try {
+            String insertAd = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(insertAd, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1, ad.getUserId());
+            stmt.setString(2, ad.getTitle());
+            stmt.setString(3, ad.getDescription());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating ad with category");
+        } try {
+            String insertCat = "INSERT INTO ad_category(ad_id, cat_id) VALUES(LAST_INSERT_ID(), ?);";
+            PreparedStatement stmt = connection.prepareStatement(insertCat, Statement.RETURN_GENERATED_KEYS);
+            for (String category : categories) {
+                stmt.setInt(1, Integer.parseInt(category));
+                stmt.executeUpdate();
+            }
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating ad with category");
         }
     }
 

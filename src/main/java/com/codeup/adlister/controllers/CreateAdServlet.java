@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -26,6 +29,8 @@ public class CreateAdServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         String title = request.getParameter("title").trim();
         String description = request.getParameter("description").trim();
+        String[] categories = request.getParameterValues("category");
+        System.out.println(Arrays.toString(categories));
         boolean noTitle = title.isEmpty();
         boolean noDescription = description.isEmpty();
         if(noTitle && noDescription){
@@ -36,20 +41,25 @@ public class CreateAdServlet extends HttpServlet {
             request.getSession().removeAttribute("createDescriptionFail");
             request.getSession().setAttribute("createTitleFail", true);
             response.sendRedirect("/ads/create");
-        } else if (noDescription) {
-            request.getSession().removeAttribute("createTitleFail");
-            request.getSession().setAttribute("createDescriptionFail", true);
-            response.sendRedirect("/ads/create");
         } else {
             request.getSession().removeAttribute("createTitleFail");
-            request.getSession().removeAttribute("createDescriptionFail");
-            Ad ad = new Ad(
-                    user.getId(),
-                    request.getParameter("title"),
-                    request.getParameter("description")
-            );
-            DaoFactory.getAdsDao().insert(ad);
-            response.sendRedirect("/ads");
+            if (noDescription) {
+                request.getSession().setAttribute("createDescriptionFail", true);
+                response.sendRedirect("/ads/create");
+            } else {
+                request.getSession().removeAttribute("createDescriptionFail");
+                Ad ad = new Ad(
+                        user.getId(),
+                        request.getParameter("title"),
+                        request.getParameter("description")
+                );
+                if(categories == null){
+                    DaoFactory.getAdsDao().insert(ad);
+                }else{
+                    DaoFactory.getAdsDao().insertAdAndCategory(ad, categories);
+                }
+                response.sendRedirect("/ads");
+            }
         }
     }
 }
