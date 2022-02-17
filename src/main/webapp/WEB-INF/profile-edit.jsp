@@ -39,7 +39,7 @@
         </form>
     </div>
 </div>
-<jsp:include page="/WEB-INF/partials/jquery.jsp" />
-<jsp:include page="/js/script.js" />
+<jsp:include page="/WEB-INF/partials/scripts.jsp" />
+
 </body>
 </html>
