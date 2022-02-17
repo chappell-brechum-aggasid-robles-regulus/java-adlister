@@ -19,17 +19,37 @@ public class CreateAdServlet extends HttpServlet {
             return;
         }
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
-            .forward(request, response);
+                .forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
-        Ad ad = new Ad(
-            user.getId(),
-            request.getParameter("title"),
-            request.getParameter("description")
-        );
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
+        String title = request.getParameter("title").trim();
+        String description = request.getParameter("description").trim();
+        boolean noTitle = title.isEmpty();
+        boolean noDescription = description.isEmpty();
+        if(noTitle && noDescription){
+            request.getSession().setAttribute("createTitleFail",true);
+            request.getSession().setAttribute("createDescriptionFail",true);
+            response.sendRedirect("/ads/create");
+        }else if (noTitle) {
+            request.getSession().removeAttribute("createDescriptionFail");
+            request.getSession().setAttribute("createTitleFail", true);
+            response.sendRedirect("/ads/create");
+        } else if (noDescription) {
+            request.getSession().removeAttribute("createTitleFail");
+            request.getSession().setAttribute("createDescriptionFail", true);
+            response.sendRedirect("/ads/create");
+        } else {
+            request.getSession().removeAttribute("createTitleFail");
+            request.getSession().removeAttribute("createDescriptionFail");
+            Ad ad = new Ad(
+                    user.getId(),
+                    request.getParameter("title"),
+                    request.getParameter("description")
+            );
+            DaoFactory.getAdsDao().insert(ad);
+            response.sendRedirect("/ads");
+        }
     }
 }
