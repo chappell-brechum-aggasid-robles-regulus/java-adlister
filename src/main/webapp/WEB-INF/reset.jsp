@@ -29,6 +29,10 @@
     <div class="form-group">
       <label for="newpassword">NewPassword</label>
       <input id="newpassword" name="newpassword" class="form-control" type="password">
+      <c:if test="${sessionScope.newPasswordEmpty}">
+        <div style="color: red">New password cannot be blank</div>
+      </c:if>
+      <% session.removeAttribute("newPasswordEmpty");%>
     </div>
     <div class="form-group">
       <label for="confirm_password">Confirm Password</label>

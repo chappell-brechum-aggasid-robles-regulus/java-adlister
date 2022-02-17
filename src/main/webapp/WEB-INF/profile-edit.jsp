@@ -20,7 +20,7 @@
             <c:if test="${sessionScope.emailFail}">
                 <div style="color: red">Email cannot be empty</div>
             </c:if>
-            <% session.removeAttribute("passwordFail");%>
+            <% session.removeAttribute("emailFail");%>
             <button formaction="/profile-edit" formmethod="post" class="btn btn-secondary mt-1">Apply</button>
             <c:if test="${sessionScope.emailChanged}">
                 <div style="color: green">Email Has Been Updated</div>
@@ -34,7 +34,7 @@
             <button type="submit" formaction="/resetpass" class="btn btn-secondary btn-lg">Reset My Password</button>
         </form>
         <form>
-            <button id="delete" class="btn btn-warning btn-lg">Delete Account</button>
+           <%-- <button id="delete" class="btn btn-warning btn-lg">Delete Account</button> --%>
             <button id="delete-user" type="submit" formaction="/profile/delete" formmethod="post" class="btn btn-danger btn-lg">Confirm Delete</button>
         </form>
     </div>
