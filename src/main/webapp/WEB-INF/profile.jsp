@@ -8,9 +8,14 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-
-
+<div class="container">
+    <h1>Welcome, <c:out value="${username}"/>!</h1>
+    <h4>Email: <c:out value="${email}"/></h4>
+    <form>
+        <button type="submit" formaction="/profile-edit" class="btn btn-secondary btn-lg">Edit Profile</button>
+    </form>
 </div>
+<hr>
 <div class="container">
     <h2>Your Ads</h2>
     <c:forEach var="ad" items="${ads}">
