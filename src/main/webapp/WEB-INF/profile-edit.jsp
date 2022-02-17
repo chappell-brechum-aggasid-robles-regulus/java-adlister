@@ -34,7 +34,7 @@
             <button type="submit" formaction="/resetpass" class="btn btn-secondary btn-lg">Reset My Password</button>
         </form>
         <form>
-            <button id="delete" class="btn btn-warning btn-lg">Delete Account</button>
+           <%-- <button id="delete" class="btn btn-warning btn-lg">Delete Account</button> --%>
             <button id="delete-user" type="submit" formaction="/profile/delete" formmethod="post" class="btn btn-danger btn-lg">Confirm Delete</button>
         </form>
     </div>
