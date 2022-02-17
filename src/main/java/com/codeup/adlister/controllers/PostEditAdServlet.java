@@ -15,6 +15,13 @@ import java.io.IOException;
 public class PostEditAdServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute("user") == null) {
+            resp.sendRedirect("/login");
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currentUser = (User) req.getSession().getAttribute("user");
         long userId = currentUser.getId();
