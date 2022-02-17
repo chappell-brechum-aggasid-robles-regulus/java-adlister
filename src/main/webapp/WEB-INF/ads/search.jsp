@@ -17,9 +17,24 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
     <form action="/ads/search" method="get">
-        <label for="query">Search: </label>
-        <input type="text" name="query" id="query" placeholder="Search">
-        <input type="submit" name="submit" value="Submit Search">
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="0">All</option>
+            <option value="1">Free</option>
+            <option value="2">Used</option>
+            <option value="3">New</option>
+            <option value="4">Jobs</option>
+            <option value="5">Services</option>
+            <option value="6">Lost</option>
+            <option value="7">Wanted</option>
+            <option value="8">Electronics</option>
+            <option value="9">Vehicles</option>
+            <option value="10">Pets</option>
+            <option value="11">Furniture</option>
+        </select>
+        <label for="categorySearch"></label>
+        <input type="text" name="query" id="categorySearch" placeholder="Search">
+        <input type="submit" id="submit" value="Search By Category">
     </form>
     <h1>Here are all search results that include <c:out value="${query}"/>!</h1>
 
