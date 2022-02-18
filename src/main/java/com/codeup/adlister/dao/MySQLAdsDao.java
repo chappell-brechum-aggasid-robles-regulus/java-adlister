@@ -162,14 +162,21 @@ public class MySQLAdsDao implements Ads {
     }
 
     public void deleteAdById(long ad_id) {
-        String sql = "DELETE FROM ads WHERE id = ?";
-        PreparedStatement stmt;
         try {
+            String newSql = "DELETE FROM ad_category WHERE ad_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(newSql);
+            stmt.setString(1, String.valueOf(ad_id));
+            stmt.executeUpdate();
+        } catch(SQLException e) {
+            throw new RuntimeException("Error deleting Ad in ad_cat table.");
+        } try {
+            String sql = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, String.valueOf(ad_id));
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding the Ad!");
+            throw new RuntimeException("Error deleting Ad in ads table!");
         }
     }
 
