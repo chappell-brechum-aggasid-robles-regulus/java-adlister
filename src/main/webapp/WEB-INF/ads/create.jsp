@@ -13,14 +13,14 @@
     <form action="/ads/create" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" required="required">
+            <input id="title" name="title" class="form-control" type="text" required="required" pattern="^(?!\s*$).+">
             <c:if test="${sessionScope.createTitleFail}">
                 <div style="color:red">Title cannot be empty</div>
             </c:if>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" type="text" required="required"></textarea>
+            <textarea id="description" name="description" class="form-control" required="required" style="resize: none;"></textarea>
             <c:if test="${sessionScope.createDescriptionFail}">
                 <div style="color:red">Description cannot be empty</div>
             </c:if>
