@@ -21,6 +21,12 @@
     <h1> Here is your ad </h1>
 
     <h2>${ad.title}</h2>
+    <p>Categories:
+        <c:forEach var="category" items="${categories}">
+            <c:out value="${category.name}"/>
+    </c:forEach>
+    </p>
+
     <p>${ad.description}</p>
     <p><a href="/userProfile">${user.username}</a></p>
     <p>${user.email}</p>
