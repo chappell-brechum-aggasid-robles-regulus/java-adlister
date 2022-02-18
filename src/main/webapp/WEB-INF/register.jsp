@@ -45,7 +45,7 @@
         <form name="form" action="/register" method="post" onsubmit="return validate()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+                <input id="username" name="username" class="form-control" minlength="5" type="text">
 
                 <c:if test="${sessionScope.userNameExists}">
                     <div style="color: red">Username exists already</div>
