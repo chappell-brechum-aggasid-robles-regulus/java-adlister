@@ -180,6 +180,14 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public void deleteByUser(long user_id) throws SQLException {
+        String sql = "DELETE FROM ads WHERE user_id = ?";
+        PreparedStatement stmt;
+        stmt = connection.prepareStatement(sql);
+        stmt.setLong(1, user_id);
+        stmt.executeUpdate();
+    }
+
     public void editAdById(Ad ad) {
         String query = "UPDATE ads SET title = ?, description = ?";
         query += "WHERE id = ?";

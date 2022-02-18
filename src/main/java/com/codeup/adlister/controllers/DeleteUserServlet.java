@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/profile/delete")
 public class DeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
-        DaoFactory.getUsersDao().deleteUser(currentUser.getId());
+        long userId = currentUser.getId();
+        DaoFactory.getUsersDao().deleteUser(userId);
         request.getSession().invalidate();
         request.getRequestDispatcher("/WEB-INF/delete.jsp").forward(request, response);
     }
