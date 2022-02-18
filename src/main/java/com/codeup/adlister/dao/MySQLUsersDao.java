@@ -111,6 +111,12 @@ public class MySQLUsersDao implements Users {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public User getUserById(Long adUserId) {
+        return null;
+    }
+
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {
             return null;

@@ -18,9 +18,9 @@ public class IndividualAdServlet extends HttpServlet {
         String adId = request.getParameter("adId");
         Ad adResult = DaoFactory.getAdsDao().getAdById(Long.valueOf(adId));
         request.setAttribute("ad", adResult);
-//        Long adUserId = adResult.getUserId();
-//        User userResult = DaoFactory.getUsersDao().getUserById(adUserId);
-//        req.setAttribute("user", userResult);
+        Long adUserId = adResult.getUserId();
+        User userResult = DaoFactory.getUsersDao().getUserById(adUserId);
+        request.setAttribute("user", userResult);
         request.getRequestDispatcher("/WEB-INF/ads/showAds.jsp").forward(request, response);
     }
 }
