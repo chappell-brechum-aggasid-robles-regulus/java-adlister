@@ -18,8 +18,10 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
-    <h1> Here is your ad </h1>
-
+        <p>
+            <a href="/userProfile">Posted by: ${user.username}</a>
+        </p>
+    <p>Email: ${user.email}</p>
     <h2>${ad.title}</h2>
     <p>Categories:
         <c:forEach var="category" items="${categories}">
@@ -28,8 +30,6 @@
     </p>
 
     <p>${ad.description}</p>
-    <p><a href="/userProfile">${user.username}</a></p>
-    <p>${user.email}</p>
 
 </div>
 </body>
