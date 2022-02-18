@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label for="newpassword">NewPassword</label>
-      <input id="newpassword" name="newpassword" class="form-control" type="password">
+      <input id="newpassword" name="newpassword" class="form-control" type="password" minlength="6">
       <c:if test="${sessionScope.newPasswordEmpty}">
         <div style="color: red">New password cannot be blank</div>
       </c:if>

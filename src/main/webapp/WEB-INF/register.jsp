@@ -45,7 +45,7 @@
         <form name="form" action="/register" method="post" onsubmit="return validate()">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+                <input id="username" name="username" class="form-control" minlength="5" type="text">
 
                 <c:if test="${sessionScope.userNameExists}">
                     <div style="color: red">Username exists already</div>
@@ -59,11 +59,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password" placeholder="Password must be at least 6 characters long">
+                <input id="password" name="password" class="form-control" type="password" minlength="6" placeholder="Password must be at least 6 characters long">
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
-                <input id="confirm_password" name="confirm_password" class="form-control" type="password" placeholder="Password must be at least 6 characters long">
+                <input id="confirm_password" name="confirm_password" class="form-control" type="password" minlength="6" placeholder="Password must be at least 6 characters long">
             </div>
             <input type="submit" class="btn btn-primary btn-block" on>
         </form>
