@@ -89,11 +89,11 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-    public User getUserById(long userId){
+    public User getUserById(long adUserId){
         String sql = "SELECT * FROM users WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setLong(1, userId);
+            stmt.setLong(1, adUserId);
             ResultSet rs = stmt.executeQuery();
             return extractUser(rs);
         } catch (SQLException e) {
@@ -112,10 +112,6 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-    @Override
-    public User getUserById(Long adUserId) {
-        return null;
-    }
 
     private User extractUser(ResultSet rs) throws SQLException {
         if (! rs.next()) {

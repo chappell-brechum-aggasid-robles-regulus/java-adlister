@@ -22,6 +22,7 @@
 
     <h2>${ad.title}</h2>
     <p>${ad.description}</p>
+    <p><a href="/userProfile">${user.username}</a></p>
     <p>${user.email}</p>
 
 </div>

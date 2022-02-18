@@ -62,11 +62,6 @@ public class ListAdsDao implements Ads {
 
     }
 
-    @Override
-    public void deleteAdWithCatById(long parseLong) {
-
-    }
-
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(
