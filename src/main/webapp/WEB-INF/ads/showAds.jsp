@@ -20,8 +20,9 @@
 <div class="container">
     <h1> Here is your ad </h1>
 
-   <h2>${ad.title}</h2>
+    <h2>${ad.title}</h2>
     <p>${ad.description}</p>
+    <p>${user.email}</p>
 
 </div>
 </body>
