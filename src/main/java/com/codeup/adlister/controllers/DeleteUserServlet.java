@@ -14,6 +14,7 @@ import java.io.IOException;
 public class DeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("user");
+        DaoFactory.getAdsDao().deleteByUser(currentUser.getId());
         DaoFactory.getUsersDao().deleteUser(currentUser.getId());
         request.getSession().invalidate();
         request.getRequestDispatcher("/WEB-INF/delete.jsp").forward(request, response);
