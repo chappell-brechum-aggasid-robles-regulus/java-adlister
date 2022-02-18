@@ -7,20 +7,21 @@
     </jsp:include>
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
     <h1>Edit Ad</h1>
     <form action="/ads/editAd" method="post">
         <div class="form-group">
             <input type="hidden" name="id" value="<c:out value='${ad.id}' />"/>
             <label> Title:
-                <input type="text" name="title" class="form-control"
+                <input type="text" name="title" class="form-control" required="required" pattern="^(?!\s*$).+"
                        value="<c:out value='${ad.title}'/>"
                 />
             </label>
         </div>
         <div class="form-group">
             <label for="description">Description: </label>
-            <textarea id="description" name="description" class="form-control"><c:out
+            <textarea id="description" name="description" class="form-control" style="resize: none;" required><c:out
                     value='${ad.description}'/></textarea>
         </div>
         <div class="form-group">
