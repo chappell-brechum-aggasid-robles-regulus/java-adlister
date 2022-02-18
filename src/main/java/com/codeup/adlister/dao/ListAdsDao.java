@@ -46,6 +46,9 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
+    public void deleteByUser(long param) {
+    }
+    @Override
     public void editAdById(Ad ad) {
     }
 

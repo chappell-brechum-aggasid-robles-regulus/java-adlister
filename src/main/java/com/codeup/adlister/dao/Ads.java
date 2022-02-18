@@ -2,6 +2,7 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface Ads {
@@ -27,7 +28,7 @@ public interface Ads {
     void deleteAdById(long param);
 
     // Delete All Ads by User Id
-    void deleteByUser(long param);
+    void deleteByUser(long param) throws SQLException;
 
     // Update Edit ad by Id
     void editAdById(Ad ad);
