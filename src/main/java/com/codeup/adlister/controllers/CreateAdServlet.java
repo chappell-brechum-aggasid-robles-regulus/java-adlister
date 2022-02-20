@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -19,6 +18,7 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+        request.setAttribute("cats", DaoFactory.getCategoriesDao().all());
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
                 .forward(request, response);
     }
@@ -28,7 +28,6 @@ public class CreateAdServlet extends HttpServlet {
         String title = request.getParameter("title").trim();
         String description = request.getParameter("description").trim();
         String[] categories = request.getParameterValues("category");
-        System.out.println(Arrays.toString(categories));
         boolean noTitle = title.isEmpty();
         boolean noDescription = description.isEmpty();
         if(noTitle && noDescription){

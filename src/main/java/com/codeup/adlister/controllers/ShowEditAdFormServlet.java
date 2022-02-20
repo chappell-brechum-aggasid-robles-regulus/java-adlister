@@ -19,6 +19,7 @@ public class ShowEditAdFormServlet extends HttpServlet {
         String adId = req.getParameter("id");
         Ad existingAd = DaoFactory.getAdsDao().getAdById(Long.valueOf(adId));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/ads/edit.jsp");
+        req.setAttribute("cats", DaoFactory.getCategoriesDao().all());
         req.setAttribute("ad", existingAd);
         dispatcher.forward(req, resp);
     }

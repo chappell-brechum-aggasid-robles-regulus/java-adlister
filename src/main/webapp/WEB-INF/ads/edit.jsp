@@ -25,6 +25,15 @@
                     value='${ad.description}'/></textarea>
         </div>
         <div class="form-group">
+            <fieldset>
+                <c:forEach var="category" items="${cats}">
+                    <input id="<c:out value="${category.name}"/>" type="checkbox" name="category"
+                           value="<c:out value="${category.id}"/>">
+                    <label for="<c:out value="${category.name}"/>"><c:out value="${category.name}"/></label>
+                </c:forEach>
+            </fieldset>
+        </div>
+        <div class="form-group">
             <button formaction="/ads/updateAd?adId=<c:out value="${ad.id}"/>" formmethod="post" class="btn btn-primary btn=block">Save</button>
         </div>
     </form>

@@ -2,7 +2,6 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
-import com.codeup.adlister.models.AdCategory;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -17,8 +16,9 @@ import java.io.IOException;
 public class IndividualAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adId = request.getParameter("adId");
+        int ad_id = Integer.parseInt(request.getParameter("adId"));
         Ad adResult = DaoFactory.getAdsDao().getAdById(Long.valueOf(adId));
-        request.getSession().setAttribute("categories", DaoFactory.getAdCategoriesDao().searchCategoriesByAdId(Long.parseLong(adId)));
+        request.setAttribute("categories", DaoFactory.getCategoriesDao().searchCategoriesByAdId(ad_id));
         request.setAttribute("ad", adResult);
         Long adUserId = adResult.getUserId();
         User userResult = DaoFactory.getUsersDao().getUserById(adUserId);

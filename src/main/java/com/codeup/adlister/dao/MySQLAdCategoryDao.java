@@ -27,9 +27,10 @@ public class MySQLAdCategoryDao implements AdCategories {
     public List<AdCategory> searchCategoriesByAdId(long adId) {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT name FROM categories inner join  ad_category on ad_category.cat_id = categories.id WHERE ad_category.ad_id = ?;");
+            stmt = connection.prepareStatement("SELECT * FROM ad_category inner join categories on ad_category.cat_id = categories.id WHERE ad_category.ad_id = ?;");
             stmt.setLong(1,adId);
             ResultSet rs = stmt.executeQuery();
+            System.out.println(stmt);
             return createAdCategoriesFromResults(rs);
         }catch(SQLException e){
             e.printStackTrace();
@@ -39,8 +40,8 @@ public class MySQLAdCategoryDao implements AdCategories {
 
     private AdCategory extractAdCategory(ResultSet rs) throws SQLException{
         return new AdCategory(
-                rs.getInt("cat_id"),
-                rs.getInt("ad_id")
+                rs.getLong("cat_id"),
+                rs.getLong("ad_id")
         );
     }
 
@@ -54,6 +55,13 @@ public class MySQLAdCategoryDao implements AdCategories {
 
     @Override
     public List<AdCategory> all() {
-        return null;
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ad_category");
+            ResultSet rs = stmt.executeQuery();
+            return createAdCategoriesFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
     }
 }

@@ -31,11 +31,17 @@ public interface Ads {
     void deleteByUser(long param) throws SQLException;
 
     // Update Edit ad by Id
-    void editAdById(Ad ad);
+    void editAdById(Ad ad, String[] categories);
 
     // Search Ad by Category and Title
     List<Ad> searchAdByCategory(long category, String param);
 
     // Insert Ad and Category
     void insertAdAndCategory(Ad ad, String[] categories);
+
+    // Delete Categories from Ad
+    void deleteAdCategories(long ad_id);
+
+    // Insert Categories to AD
+    void addCategoriesToAd(long ad_id, String[] categories);
 }

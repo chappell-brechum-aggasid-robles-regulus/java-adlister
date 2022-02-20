@@ -49,7 +49,7 @@ public class ListAdsDao implements Ads {
     public void deleteByUser(long param) {
     }
     @Override
-    public void editAdById(Ad ad) {
+    public void editAdById(Ad ad, String[] categories) {
     }
 
     @Override
@@ -59,6 +59,16 @@ public class ListAdsDao implements Ads {
 
     @Override
     public void insertAdAndCategory(Ad ad, String[] categories) {
+
+    }
+
+    @Override
+    public void deleteAdCategories(long ad_id) {
+
+    }
+
+    @Override
+    public void addCategoriesToAd(long ad_id, String[] categories) {
 
     }
 

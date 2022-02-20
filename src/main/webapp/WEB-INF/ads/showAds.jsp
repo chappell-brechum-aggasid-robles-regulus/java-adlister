@@ -12,11 +12,11 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Current Ad" />
+        <jsp:param name="title" value="Current Ad"/>
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
     <h1> Here is your ad </h1>
 
@@ -24,7 +24,7 @@
     <p>Categories:
         <c:forEach var="category" items="${categories}">
             <c:out value="${category.name}"/>
-    </c:forEach>
+        </c:forEach>
     </p>
 
     <p>${ad.description}</p>
