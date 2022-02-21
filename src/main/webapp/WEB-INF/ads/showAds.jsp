@@ -18,19 +18,17 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
-        <p>
-            <a href="/userProfile">Posted by: ${user.username}</a>
-        </p>
-    <p>Email: ${user.email}</p>
     <h2>${ad.title}</h2>
+    <p>${ad.description}</p>
     <p>Categories:
         <c:forEach var="category" items="${categories}">
             <c:out value="${category.name}"/>
-    </c:forEach>
+        </c:forEach>
     </p>
-
-    <p>${ad.description}</p>
-
+    <p>
+        <a href="/userProfile">Posted by: ${user.username}</a>
+    </p>
+    <p>Email: ${user.email}</p>
 </div>
 </body>
 </html>
