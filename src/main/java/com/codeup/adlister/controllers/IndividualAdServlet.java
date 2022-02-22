@@ -22,7 +22,7 @@ public class IndividualAdServlet extends HttpServlet {
         request.setAttribute("ad", adResult);
         Long adUserId = adResult.getUserId();
         User userResult = DaoFactory.getUsersDao().getUserById(adUserId);
-        request.setAttribute("user", userResult);
+        request.setAttribute("userInfo", userResult);
         request.getRequestDispatcher("/WEB-INF/ads/showAds.jsp").forward(request, response);
     }
 }
