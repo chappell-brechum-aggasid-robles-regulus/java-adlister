@@ -173,6 +173,34 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public void deleteAdCategories(long ad_id) {
+        try {
+            String sql = "delete from ad_category where exists(SELECT * from ads where ad_category.ad_id = ads.id AND ads.id = ?);";
+            PreparedStatement stmt;
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1,String.valueOf(ad_id));
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting Categories from Ad");
+        }
+    }
+
+    public void addCategoriesToAd(long ad_id, String[] categories){
+        try {
+            String insertCat = "INSERT INTO ad_category(ad_id, cat_id) VALUES(?, ?);";
+            PreparedStatement stmt = connection.prepareStatement(insertCat, Statement.RETURN_GENERATED_KEYS);
+            for (String category : categories) {
+                stmt.setString(1, String.valueOf(ad_id));
+                stmt.setInt(2, Integer.parseInt(category));
+                stmt.executeUpdate();
+            }
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating ad with category");
+        }
+    }
+
     public void deleteByUser(long user_id) throws SQLException {
         String sql = "DELETE FROM ads WHERE user_id = ?";
         PreparedStatement stmt;
@@ -181,7 +209,7 @@ public class MySQLAdsDao implements Ads {
         stmt.executeUpdate();
     }
 
-    public void editAdById(Ad ad) {
+    public void editAdById(Ad ad, String[] categories) {
         String query = "UPDATE ads SET title = ?, description = ?";
         query += "WHERE id = ?";
         try {
@@ -189,6 +217,10 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
             stmt.setLong(3, ad.getId());
+            deleteAdCategories(ad.getId());
+            if (categories != null){
+                addCategoriesToAd(ad.getId(), categories);
+            }
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("error finding the ad by the id", e);
