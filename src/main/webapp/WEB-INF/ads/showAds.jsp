@@ -26,9 +26,9 @@
         </c:forEach>
     </p>
     <p>
-        <a href="/userProfile">Posted by: ${user.username}</a>
+        <a href="/userProfile">Posted by: ${userInfo.username}</a>
     </p>
-    <p>Email: ${user.email}</p>
+    <p>Email: ${userInfo.email}</p>
 </div>
 </body>
 </html>
